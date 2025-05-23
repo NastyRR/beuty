@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Салон Краси "Перфоменс"</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-container h1 {
+      font-size: 2rem;
+      color: #e91e63;
+    }
+
+    .nav-links a {
+      margin-left: 2rem;
+      text-decoration: none;
+      color: #555;
+      font-size: 1.1rem;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #e91e63;
+      transform: translateY(-2px);
+    }
+
+    section {
+      padding: 5rem 2rem;
+    }
+
+    #home {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c') no-repeat center/cover;
+      color: #fff;
+      text-align: center;
+    }
+
+    #home .hero-content {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 3rem;
+      border-radius: 15px;
+      animation: fadeIn 1s ease-in;
+    }
+
+    #home h2 {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    #home p {
+      font-size: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1rem 3rem;
+      background-color: #e91e63;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 25px;
+      font-size: 1.2rem;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #c2185b;
+      transform: scale(1.05);
+    }
+
+    #services, #about, #gallery, #reviews, #contact {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    #services {
+      background-color: #fff;
+    }
+
+    #services h2, #about h2, #gallery h2, #reviews h2, #contact h2 {
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 3.5rem;
+      color: #333;
+      animation: slideUp 0.8s ease-out;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .service-card {
+      background-color: #f9f9f9;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .service-card h3 {
+      font-size: 1.6rem;
+      color: #e91e63;
+      margin-bottom: 0.8rem;
+    }
+
+    .service-card p {
+      color: #555;
+      font-size: 1rem;
+    }
+
+    #about {
+      background-color: #fce4ec;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    #about img {
+      max-width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1s ease-in;
+    }
+
+    #about .about-content {
+      padding: 2rem;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #555;
+      animation: slideUp 0.8s ease-out;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    .gallery-grid img:hover {
+      transform: scale(1.05);
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .review-card {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    .review-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .review-card h3 {
+      font-size: 1.3rem;
+      color: #e91e63;
+      margin-bottom: 0.8rem;
+    }
+
+    .star {
+      color: #fbc02d;
+      font-size: 1.2rem;
+    }
+
+    #contact {
+      background-color: #fff;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    form input, form textarea {
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    form input:focus, form textarea:focus {
+      border-color: #e91e63;
+      outline: none;
+    }
+
+    form textarea {
+      resize: vertical;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 2rem;
+      font-size: 1rem;
+    }
+
+    .heart-discount {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 60px;
+      height: 60px;
+      background-color: #e91e63;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+      z-index: 1000;
+    }
+
+    .heart-discount:hover {
+      transform: scale(1.1);
+    }
+
+    .heart-discount svg {
+      width: 30px;
+      height: 30px;
+      fill: #fff;
+    }
+
+    .discount-popup {
+      position: fixed;
+      bottom: 100px;
+      left: 20px;
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      max-width: 300px;
+      z-index: 1000;
+      animation: slideIn 0.5s ease-out;
+      display: none;
+    }
+
+    .discount-popup.show {
+      display: block;
+    }
+
+    .discount-popup h3 {
+      font-size: 1.4rem;
+      color: #e91e63;
+      margin-bottom: 0.5rem;
+    }
+
+    .discount-popup p {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(-50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      #home h2 {
+        font-size: 2.5rem;
+      }
+      #home p {
+        font-size: 1.2rem;
+      }
+      .nav-links a {
+        margin-left: 1rem;
+        font-size: 1rem;
+      }
+      #about {
+        grid-template-columns: 1fr;
+      }
+      .about-content {
+        text-align: center;
+      }
+    }
+
+    @media (min-width: 1920px) {
+      .nav-container, #services, #about, #gallery, #reviews, #contact {
+        max-width: 1400px;
+      }
+      #home h2 {
+        font-size: 4.5rem;
+      }
+      #home p {
+        font-size: 1.8rem;
+      }
+      #services h2, #about h2, #gallery h2, #reviews h2, #contact h2 {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.22.10/babel.min.js"></script>
+  <script type="text/babel">
+    const { useState } = React;
+
+    if (!window.React || !window.ReactDOM) {
+      document.getElementById('root').innerHTML = '<div style="color: red; text-align: center; padding: 2rem; font-size: 1.2rem;">Ошибка: Не удалось загрузить React или ReactDOM. Проверьте подключение к интернету.</div>';
+    }
+
+    function NavBar() {
+      return (
+        <nav>
+          <div className="nav-container">
+            <h1>Элеганс</h1>
+            <div className="nav-links">
+              <a href="#home">Головна</a>
+              <a href="#services">Послуги</a>
+              <a href="#about">Про нас</a>
+              <a href="#gallery">Галерея</a>
+              <a href="#reviews">Відгуки</a>
+              <a href="#contact">Контакти</a>
+            </div>
+          </div>
+        </nav>
+      );
+    }
+
+    function Hero() {
+      return (
+        <section id="home">
+          <div className="hero-content">
+            <h2>Салон Краси Перфоменс</h2>
+            <p>Розкрийте свою красу з нашими професійними послугами</p>
+            <a href="#contact" className="btn">Записатись</a>
+          </div>
+        </section>
+      );
+    }
+
+    function Services() {
+      const services = [
+        { name: "Стрижка та укладання", description: "Модні стрижки та професійне укладання для будь-якого випадку.", price: "від 1000 грн" },
+        { name: "Фарбування волосся", description: "Сучасні техніки фарбування для яскравого та стійкого результату.", price: "від 2500 грн" },
+        { name: "Манікюр та педикюр", description: "Ідеальний догляд за нігтями з використанням преміум-продуктів.", price: "від 500 грн" },
+        { name: "Макіяж", description: "Професійний макіяж для будь-якої події, від денної до вечірньої.", price: "від 1500 грн" },
+      ];
+
+      return (
+        <section id="services">
+          <h2>Наши послуги</h2>
+          <div className="services-grid">
+            {services.map((service, index) => (
+              <div key={index} className="service-card">
+                <h3>{service.name}</h3>
+                <p>{service.description}</p>
+                <p><strong>{service.price}</strong></p>
+              </div>
+            ))}
+          </div>
+        </section>
+      );
+    }
+
+    function About() {
+      return (
+        <section id="about">
+          <h2>Про нас</h2>
+          <div className="about-content">
+            <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796" alt="Салон" />
+            <p>
+                Салон краси "Перфоменс" - це місце, де турбота про вашу красу перетворюється на мистецтво. Наші майстри – професіонали з багаторічним досвідом, готові створити для вас ідеальний образ. Ми використовуємо тільки найкращі продукти та сучасні технології, щоб ви відчували себе впевнено та красиво.
+            </p>
+          </div>
+        </section>
+      );
+    }
+
+    function Gallery() {
+      const images = [
+        "https://cdn.prod.website-files.com/5a3f51b87b791a0001979d8e/64a2f9a7e3d11964e88834f5_image_1.webp",
+        "https://cdn5.vedomosti.ru/image/2024/4i/1aq3sp/original-1ok1.jpg",
+        "https://medicalmag.ru/upload/medialibrary/63e/84bf872r2z9b0cmqmmn0ih7swqkfvkzq.jpg",
+        "https://lh5.googleusercontent.com/proxy/HiArjNWlYQXn5_u6U7gpHvJGoYZBqT63viliJu9zmd6XOg7b5eFZ5L_j9TJwDtBzo32uqG0DxI1-FUCDSqEP9WBY4pwF3M-_fWXj6GcPPmytbgdOL2J_lLw1aw",
+      ];
+
+      return (
+        <section id="gallery">
+          <h2>Галерея</h2>
+          <div className="gallery-grid">
+            {images.map((img, index) => (
+              <img key={index} src={img} alt={`Галерея ${index + 1}`} />
+            ))}
+          </div>
+        </section>
+      );
+    }
+
+    function Reviews() {
+      const reviews = [
+        { name: "Ганна", text: "Чудовий салон! Майстри дуже уважні, а результат перевершив усі очікування!", rating: 5 },
+        { name: "Катерина", text: "Люблю цей салон за атмосферу та професіоналізм. Завжди йду задоволеною!", rating: 5 },
+        { name: "Марія", text: "Відмінне фарбування, колір тримається довго, а волосся виглядає здоровим.", rating: 4 },
+      ];
+
+      return (
+        <section id="reviews">
+          <h2>Відгуки</h2>
+          <div className="reviews-grid">
+            {reviews.map((review, index) => (
+              <div key={index} className="review-card">
+                <h3>{review.name}</h3>
+                <p>{review.text}</p>
+                <div>
+                  {[...Array(review.rating)].map((_, i) => (
+                    <span key={i} className="star">★</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      );
+    }
+
+    function Contact() {
+      const [formData, setFormData] = useState({ name: '', phone: '', message: '' });
+
+      const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+      };
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        alert('Ваше повідомлення відправлене!');
+        setFormData({ name: '', phone: '', message: '' });
+      };
+
+      return (
+        <section id="contact">
+          <h2>Зв'яжіться з нами</h2>
+          <div className="contact-grid">
+            <div>
+              <p>Адрес: Вірменський провулок, 1/3, Харків</p>
+              <p>Телефон: +38(009)1409245</p>
+              <p>Email: info@perfomens.ua</p>
+              <p>Час работи: Пн-Вс 10:00–20:00</p>
+            </div>
+            <div>
+              <form onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Ваше ім'я"
+                  required
+                />
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="Ваш телефон"
+                  required
+                />
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Ваше повідомлення"
+                  rows="4"
+                ></textarea>
+                <button type="submit" className="btn">Відправити</button>
+              </form>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function HeartDiscount() {
+      const [isOpen, setIsOpen] = useState(false);
+
+      const togglePopup = () => {
+        setIsOpen(!isOpen);
+      };
+
+      return (
+        <div>
+          <div className="heart-discount" onClick={togglePopup}>
+            <svg viewBox="0 0 24 24">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </div>
+          <div className={`discount-popup ${isOpen ? 'show' : ''}`}>
+            <h3>Спеціальна знижка!</h3>
+            <p>Отримайте 10% знижку на першу послугу під час запису онлайн. Використовуйте код PERFOMENS10</p>
+          </div>
+        </div>
+      );
+    }
+
+    function Footer() {
+      return (
+        <footer>
+            <p>© 2025 Салон Краси "Перфоменс". Усі права захищені.</p>
+        </footer>
+      );
+    }
+
+    function App() {
+      return (
+        <div>
+          <NavBar />
+          <Hero />
+          <Services />
+          <About />
+          <Gallery />
+          <Reviews />
+          <Contact />
+          <HeartDiscount />
+          <Footer />
+        </div>
+      );
+    }
+
+    try {
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<App />);
+    } catch (e) {
+      document.getElementById('root').innerHTML = '<div style="color: red; text-align: center; padding: 2rem; font-size: 1.2rem;">Ошибка рендеринга: ' + e.message + '</div>';
+    }
+  </script>
+</body>
+</html>
